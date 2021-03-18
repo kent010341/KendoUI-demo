@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div id="view">
+        <input data-role="slider" 
+               data-min="0" 
+               data-max="100" 
+               data-show-buttons="false" 
+               data-small-step="10" 
+               data-large-step="20" 
+               data-bind="value: selectedNumber">
+        <div data-role="chart" 
+             data-legend="{ visible: false }" 
+             data-series="[{
+                  type: 'bullet',
+                  currentField: 'current',
+                  targetField: 'target',
+                  colorField: 'color',
+                  target: { color: 'black' }
+              }]" 
+             data-bind="source: dsBullet"></div>
+    </div>
+    <script>
+        var viewModel = kendo.observable({
+            selectedNumber: 30,
+            dsBullet: [
+                  {
+                    current: 40,//this.get("selectedNumber"),
+                    target: 60,
+                    category: 1,
+                    color: "lightgreen"
+                  }
+                ]
+        });
+
+        kendo.bind($("#view"), viewModel);
+    </script>
+</body>
+</html>
