@@ -16,9 +16,7 @@
         </table>
         <script>
             var valAlarm = 50;
-            var valCurr = 80;
-
-            var colorBar = (valCurr < valAlarm) ? "green" : "red";
+            var valCurr = 20;
 
             $("#example-chart").kendoChart({
                 legend: {
@@ -26,7 +24,7 @@
                 },
                 series: [{
                     type: "bullet",
-                    color: colorBar, // 數值線的顏色
+                    color: (valCurr < valAlarm) ? "green" : "red", // 數值線的顏色
                     data: [{
                         current: valCurr, // 當前數值，以長條形呈現
                         target: valAlarm // 目標數值，以細直線呈現
