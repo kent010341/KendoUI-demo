@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div id="view">
+        <input data-role="slider" 
+               data-min="0" 
+               data-max="100" 
+               data-show-buttons="false" 
+               data-small-step="1" 
+               data-large-step="5" 
+               data-bind="value: selectedNumber">
+        <div data-role="arcgauge" 
+             data-colors="[{to: 40, color: 'green'} ,{from: 40, to: 75, color: 'orange'}, {from: 75, color: 'red'}]" 
+             data-scale="{ minorUnit: 10, startAngle: 0, endAngle: 180, min: 0, max: 100 }" 
+             data-center-template="#: value #%"
+             data-bind="value: selectedNumber"></div>
+    </div>
+    <script>
+        var viewModel = kendo.observable({
+            selectedNumber: 30
+        });
+
+        kendo.bind($("#view"), viewModel);
+    </script>
+</body>
+</html>
