@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo UI Demo</title>
+        <link href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" rel="stylesheet">
+        <link href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" rel="stylesheet">
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+    </head>
+    <body>
+        <div id="gauge-demo"/>
+        <script>
+            var ranges = [{
+                from: 0,
+                to: 60,
+                color: "lightgreen"
+            }, {
+                from: 60,
+                to: 100,
+                color: "red"
+            }];
+
+            $("#gauge-demo").kendoArcGauge({
+                // Radial Gauge的主題，參考：https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/theme
+                theme: 'none',
+                value: 30,
+                centerTemplate: "#: value #%",
+                color: "green",
+                scale: { // 刻度
+                    minorUnit: 10, // 刻度單位
+                    majorTicks: {
+                        size: 3 // 刻度線長度
+                    },
+                    startAngle: 0, // 開始角度，單位：度
+                    endAngle: 180, // 結束角度，單位：度
+                    min: 0, // 最小值，角度對應startAngle
+                    max: 100, // 最大值，角度對應endAngle
+                    labels: { // 刻度文字
+                        visible: true,
+                        position: "inside"
+                    },
+                    rangeSize: 10 // 外面那個環形的寬度
+                }
+            });
+        </script>
+    </body>
+</html>
