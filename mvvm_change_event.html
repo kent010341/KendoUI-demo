@@ -15,12 +15,13 @@
                data-min="0" 
                data-max="100" 
                data-show-buttons="false" 
-               data-small-step="10" 
-               data-large-step="20" 
+               data-small-step="1" 
+               data-large-step="5" 
                data-bind="value: selectedNumber">
-        <div data-role="lineargauge"
+        <div id="gauge"
+             data-role="lineargauge"
              data-pointer="{color: 'lightgreen', size: 5}" 
-             data-scale="{minorUnit: 10, min: 0, max: 100, labels: {visible: true, position: 'outside', color: 'white'}}" 
+             data-scale="{minorUnit: 1, min: 0, max: 100, labels: {visible: true, position: 'outside', color: 'white'}}" 
              data-bind="value: selectedNumber"></div>
     </div>
     <script>
@@ -28,7 +29,14 @@
             selectedNumber: 30
         });
         viewModel.bind("change", function(e) {
-            console.log(e.sender.selectedNumber);
+            var valCurr = e.sender.selectedNumber;
+            var gauge = $("#gauge").data("kendoLinearGauge");
+            if (valCurr >= 60) {
+              gauge.options.pointer.color = "red";
+            } else {
+              gauge.options.pointer.color = "lightgreen";
+            }
+            gauge.redraw();
         })
 
         kendo.bind($("#view"), viewModel);
