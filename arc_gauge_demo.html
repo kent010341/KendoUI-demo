@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kendo UI Demo</title>
+        <link href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" rel="stylesheet">
+        <link href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" rel="stylesheet">
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+        <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+    </head>
+    <body>
+        <input id="slider" value="30">
+        <div id="gauge-demo"/>
+        <script>
+            var ranges = [{
+                from: 0,
+                to: 60,
+                color: "lightgreen"
+            }, {
+                from: 60,
+                to: 100,
+                color: "red"
+            }];
+
+            $("#gauge-demo").kendoArcGauge({
+                theme: 'none', // 主題
+                value: 50, // 當前數值
+                centerTemplate: '<span style="color: #: color #;">#: value #%</span>', // 顯示的數字規格
+                //color: "green",
+                colors: [{ // 不同數值不同顏色
+                    to: 40,
+                    color: "green"
+                }, {
+                    from: 40,
+                    to: 75,
+                    color: "orange"
+                }, {
+                    from: 75,
+                    color: "red"
+                }],
+                scale: { // 刻度
+                    minorUnit: 10, // 刻度單位
+                    majorTicks: {
+                        size: 3 // 刻度線長度
+                    },
+                    startAngle: 0, // 開始角度，單位：度
+                    endAngle: 180, // 結束角度，單位：度
+                    min: 0, // 最小值，角度對應startAngle
+                    max: 100, // 最大值，角度對應endAngle
+                    labels: { // 刻度文字
+                        visible: true,
+                        position: "inside"
+                    },
+                    rangeSize: 10 // 外面那個環形的寬度
+                }
+            });
+
+            function updateValue() {
+                $("#gauge-demo").data("kendoArcGauge").value($("#slider").val());
+            }
+
+            $("#slider").kendoSlider({
+                min: 0,
+                max: 100,
+                change: updateValue
+            });
+
+        </script>
+    </body>
+</html>
