@@ -21,11 +21,21 @@
             }];
 
             $("#gauge-demo").kendoArcGauge({
-                // Radial Gauge的主題，參考：https://docs.telerik.com/kendo-ui/api/javascript/dataviz/ui/radialgauge/configuration/theme
-                theme: 'none',
-                value: 30,
-                centerTemplate: "#: value #%",
-                color: "green",
+                theme: 'none', // 主題
+                value: 50, // 當前數值
+                centerTemplate: "#: value #%", // 顯示的數字規格
+                //color: "green",
+                colors: [{ // 不同數值不同顏色
+                    to: 40,
+                    color: "green"
+                }, {
+                    from: 40,
+                    to: 75,
+                    color: "orange"
+                }, {
+                    from: 75,
+                    color: "red"
+                }],
                 scale: { // 刻度
                     minorUnit: 10, // 刻度單位
                     majorTicks: {
