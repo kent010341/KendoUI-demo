@@ -15,10 +15,11 @@
                data-min="0" 
                data-max="100" 
                data-show-buttons="false" 
-               data-small-step="10" 
-               data-large-step="20" 
+               data-small-step="1" 
+               data-large-step="5" 
                data-bind="value: selectedNumber">
-        <div data-role="chart" 
+        <div style="width: 30%; height: 30%;" 
+             data-role="chart" 
              data-legend="{ visible: false }" 
              data-series="[{
                   type: 'bullet',
@@ -27,19 +28,22 @@
                   colorField: 'color',
                   target: { color: 'black' }
               }]" 
+             data-value-axis="[{ min: 0, max: 100 }]"
              data-bind="source: dsBullet"></div>
     </div>
     <script>
         var viewModel = kendo.observable({
             selectedNumber: 30,
-            dsBullet: [
+            dsBullet: function() {
+                return [
                   {
-                    current: 40,//this.get("selectedNumber"),
+                    current: this.get("selectedNumber"),
                     target: 60,
                     category: 1,
-                    color: 'red'
+                    color: this.get("selectedNumber") >= 60 ? 'red' : 'lightgreen'
                   }
                 ]
+              }
         });
 
         kendo.bind($("#view"), viewModel);
