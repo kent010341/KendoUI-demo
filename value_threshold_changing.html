@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+</head>
+<body>
+    <div id="view">
+        <table>
+          <tr>
+            <td><text id="text-selected">30</text></td>
+            <td><input data-role="slider" 
+                       data-min="0" 
+                       data-max="100" 
+                       data-show-buttons="false" 
+                       data-small-step="1" 
+                       data-large-step="5" 
+                       data-bind="value: selectedNumber"></td>
+          </tr>
+          <tr>
+            <td><text id="text-threshold">60</text></td>
+            <td><input data-role="slider" 
+                       data-min="0" 
+                       data-max="100" 
+                       data-show-buttons="false" 
+                       data-small-step="1" 
+                       data-large-step="5" 
+                       data-bind="value: thresholdNumber"></td>
+          </tr>
+        </table>
+        <table>
+          <td><div id="gauge" 
+               style="width: 300px" 
+               data-role="lineargauge"
+               data-pointer="{color: 'green', size: 5}" 
+               data-scale="{minorUnit: 1, min: 0, max: 100, vertical: false, minorTicks: {visible: false}, majorTicks: {size: 10}, labels: {visible: true, position: 'outside', color: 'black'}}" 
+               data-bind="value: selectedNumber"></div></td>
+          <td><text id="text-state" style="color: green">30 %</text></td>
+        </table>
+    </div>
+    <script>
+        var viewModel = kendo.observable({
+            selectedNumber: 30,
+            thresholdNumber: 60
+        });
+
+        viewModel.bind("change", function(e) {
+            // get bound data
+            var valCurr = this.get("selectedNumber");
+            var valThreshold = this.get("thresholdNumber")
+
+            // Set text value
+            $("#text-selected").text(valCurr);
+            $("#text-threshold").text(valThreshold);
+            $("#text-state").text(kendo.toString(valCurr/100, "p0"));
+
+            // change color
+            var gauge = $("#gauge").data("kendoLinearGauge");
+            if (valCurr >= valThreshold) {
+              gauge.options.pointer.color = "red";
+              $("#text-state").css("color", "red");
+            } else {
+              gauge.options.pointer.color = "green";
+              $("#text-state").css("color", "green");
+            }
+            gauge.redraw();
+        })
+
+        kendo.bind($("#view"), viewModel);
+    </script>
+</body>
+</html>
