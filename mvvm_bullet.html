@@ -32,14 +32,16 @@
     <script>
         var viewModel = kendo.observable({
             selectedNumber: 30,
-            dsBullet: [
+            dsBullet: function() {
+                return [
                   {
-                    current: 40,//this.get("selectedNumber"),
+                    current: this.get("selectedNumber"),
                     target: 60,
                     category: 1,
-                    color: 'red'
+                    color: this.get("selectedNumber") >= 60 ? 'red' : 'lightgreen'
                   }
                 ]
+              }
         });
 
         kendo.bind($("#view"), viewModel);
