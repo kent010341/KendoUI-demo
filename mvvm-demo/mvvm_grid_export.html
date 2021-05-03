@@ -14,7 +14,7 @@
     <div id="view">
         <div data-role="grid"
                data-toolbar="[{name: 'excel', text: '匯出CSV'}]"
-               data-excel="{fileName: 'test.csv', allPages: true}"
+               data-excel="{allPages: true}"
                data-column="columns: [{ field: 'id' }, { field: 'name' }, { field: 'age' }]"
                data-bind="source: people, events: { excelExport: exportEvent }">
     </div>
@@ -36,6 +36,7 @@
             }),
             exportEvent: function(e) {
                 console.log("The export button has been clicked!!");
+                e.workbook.fileName = kendo.toString(new Date, "d") + ".csv";
             }
         });
 

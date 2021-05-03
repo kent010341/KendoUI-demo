@@ -53,6 +53,7 @@
           },
           excelExport: function(e) {
             console.log("The export button has been clicked!!");
+            e.workbook.fileName = kendo.toString(new Date, "d") + ".csv";
           }
         });
         </script>
