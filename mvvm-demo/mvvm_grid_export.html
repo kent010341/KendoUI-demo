@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.mobile.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/jszip.min.js"></script>
+</head>
+<body>
+    <div id="view">
+        <div data-role="grid"
+               data-toolbar="[{name: 'excel', text: '匯出CSV'}]"
+               data-excel="{allPages: true}"
+               data-column="columns: [{ field: 'id' }, { field: 'name' }, { field: 'age' }]"
+               data-bind="source: people, events: { excelExport: exportEvent }">
+    </div>
+    <script>
+        var viewModel = kendo.observable({
+            people: new kendo.data.DataSource({
+                data: [
+                    { id: 1, name: "Jane Doe", age: 30 },
+                    { id: 2, name: "John Doe", age: 33 }
+                ],
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            "id": { type: "number" }
+                        }
+                    }
+                }
+            }),
+            exportEvent: function(e) {
+                console.log("The export button has been clicked!!");
+                e.workbook.fileName = kendo.toString(new Date, "d") + ".csv";
+            }
+        });
+
+        kendo.bind($("#view"), viewModel);
+    </script>
+</body>
+</html>
